@@ -1,0 +1,145 @@
+{
+  "name": "background",
+  "displayName": "background",
+  "description": "Bring background images to your vscode",
+  "version": "1.2.9",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "vscode:uninstall": "node ./out/uninstall",
+    "build": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint . --ext .ts src",
+    "fix": "eslint . --fix --ext .ts src",
+    "package": "vsce package",
+    "prepare": "husky install"
+  },
+  "publisher": "shalldie",
+  "author": "shalldie",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shalldie/vscode-background.git"
+  },
+  "engines": {
+    "vscode": "^1.69.0"
+  },
+  "icon": "images/logo.png",
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.background.info",
+        "title": "%extension.background.command.info.title%"
+      },
+      {
+        "command": "extension.background.uninstall",
+        "title": "%extension.background.command.uninstall.title%"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "background",
+      "properties": {
+        "background.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "%extension.background.enabled.description%"
+        },
+        "background.useFront": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "%extension.background.useFront.description%"
+        },
+        "background.useDefault": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "%extension.background.useDefault.description%"
+        },
+        "background.style": {
+          "type": "object",
+          "default": {
+            "content": "''",
+            "pointer-events": "none",
+            "position": "absolute",
+            "z-index": "99999",
+            "width": "100%",
+            "height": "100%",
+            "background-position": "100% 100%",
+            "background-repeat": "no-repeat",
+            "opacity": 1
+          },
+          "markdownDescription": "%extension.background.style.description%"
+        },
+        "background.styles": {
+          "type": "array",
+          "default": [
+            {},
+            {},
+            {}
+          ],
+          "markdownDescription": "%extension.background.styles.description%"
+        },
+        "background.customImages": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "markdownDescription": "%extension.background.customImages.description%"
+        },
+        "background.loop": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "%extension.background.loop.description%"
+        },
+        "background.interval": {
+          "type": "number",
+          "default": 0,
+          "markdownDescription": "%extension.background.interval.description%"
+        },
+        "background.fullscreen": {
+          "type": "object",
+          "default": {
+            "image": "",
+            "opacity": 0.91,
+            "size": "cover",
+            "position": "center",
+            "interval": 0
+          },
+          "markdownDescription": "%extension.background.fullscreen.description%"
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/lockfile": "^1.0.2",
+    "@types/node": "^16.11.45",
+    "@types/stylis": "^4.0.2",
+    "@types/vscode": "^1.69.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4",
+    "vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "@vscode/sudo-prompt": "^9.3.1",
+    "lockfile": "^1.0.4",
+    "stylis": "^4.1.3"
+  }
+}

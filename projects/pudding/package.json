@@ -1,0 +1,154 @@
+{
+  "name": "pudding",
+  "displayName": "布丁助手",
+  "publisher": "gornin",
+  "description": "汉字转拼音、简繁互换、自动复制、TO BE CONTINUED...",
+  "version": "1.0.12",
+  "email": "gorningo@outlook.com",
+  "engines": {
+    "vscode": "^1.46.0"
+  },
+  "icon": "images/gyl.png",
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "布丁",
+    "简体",
+    "繁体",
+    "拼音",
+    "选中复制",
+    "剪切板",
+    "汉字",
+    "gornin",
+    "pudding"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gornin/pudding"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "布丁助手",
+      "properties": {
+        "pudding.copyOnKeyboardSelection": {
+          "type": "boolean",
+          "default": false,
+          "description": "当使用键盘选择文本时，是否复制所选文本？"
+        },
+        "pudding.copyOnMouseSelection": {
+          "type": "boolean",
+          "default": true,
+          "description": "当使用鼠标选择文本时，是否复制所选文本？"
+        },
+        "pudding.trimStartBlank": {
+          "type": "boolean",
+          "default": false,
+          "description": "是否修剪所选文本的开头空白部分?"
+        },
+        "pudding.trimEndBlank": {
+          "type": "boolean",
+          "default": true,
+          "description": "是否修剪所选文本的结尾空白部分?"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "pudding.chars-2-pinyin-upper",
+        "title": "汉字->拼音 大"
+      },
+      {
+        "command": "pudding.chars-2-pinyin-lower",
+        "title": "汉字->拼音 小"
+      },
+      {
+        "command": "pudding.s-2-t",
+        "title": "简->繁"
+      },
+      {
+        "command": "pudding.t-2-s",
+        "title": "繁->简"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "pudding.chars-2-pinyin-upper",
+        "key": "ctrl+shift+alt+u",
+        "mac": "ctrl+alt+cmd+u",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "pudding.chars-2-pinyin-lower",
+        "key": "ctrl+shift+alt+l",
+        "mac": "ctrl+alt+cmd+l",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "pudding.s-2-t",
+        "key": "ctrl+shift+alt+f",
+        "mac": "ctrl+alt+cmd+f",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "pudding.t-2-s",
+        "key": "ctrl+shift+alt+j",
+        "mac": "ctrl+alt+cmd+j",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "pudding.chars-2-pinyin-upper",
+          "group": "navigation@11",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "pudding.chars-2-pinyin-lower",
+          "group": "navigation@12",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "pudding.s-2-t",
+          "group": "navigation@13",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "pudding.t-2-s",
+          "group": "navigation@14",
+          "when": "editorHasSelection"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.46.0",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "@vscode/test-electron": "^2.3.0",
+    "eslint": "^8.36.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "debounce": "1.0.0",
+    "pinyin-pro": "^3.13.2"
+  }
+}
